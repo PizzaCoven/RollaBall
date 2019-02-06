@@ -1,0 +1,51 @@
+using System.Collections.Generic;
+using System.Drawing;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class EnemyController : MonoBehaviour
+{
+    public Text loseText;
+    public Text LivesText;
+
+    private Rigidbody rb;
+    private int lives;
+    private int count;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        loseText.text = "";
+        lives = 3;
+    }
+    void FixedUpdate()
+    {
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+    }
+    // Destroy everything that enters the trigger
+
+    void OnTriggerEnter(Collider other)
+    { 
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.gameObject.SetActive(false);
+            lives = lives -1;
+        }
+           LivesText.text = "Lives: " + lives.ToString();
+        if (lives <= 0|| lives<=2 && count<=12) 
+
+        {
+                loseText.text = "You Lose!";
+            }
+        }
+    }
