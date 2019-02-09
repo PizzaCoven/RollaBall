@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Obstacle1 : MonoBehaviour
+{
+    public float Speed;
+    public Vector3 end1;
+    public Vector3 end2;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        end1 = new Vector3(0f, .5f, -91.7f);
+        end2 = new Vector3(0f, .5f, -68.5f);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float time = Mathf.PingPong(Time.time * Speed, 1);
+        transform.position = Vector3.Lerp(end1, end2, time);
+
+    }
+}
+
